@@ -1,4 +1,4 @@
-"""news-image-20261122 entrypoint.
+"""news-image-20261122 entrypoint (stdlib only).
 
 Places the committed front page (news_2026_11_22.png) where the scorer
 expects it: /output/entry.png. The image ships in the repository and was
@@ -7,21 +7,12 @@ run leaves the same bytes behind.
 """
 import os
 import shutil
-from pathlib import Path
 
-src = Path(__file__).resolve().parent / "news_2026_11_22.png"
-out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
-out_dir.mkdir(parents=True, exist_ok=True)
-target = out_dir / "entry.png"
+src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "news_2026_11_22.png")
+out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+os.makedirs(out_dir, exist_ok=True)
+target = os.path.join(out_dir, "entry.png")
 shutil.copyfile(src, target)
-print("entry image written to", target)
 # scorer note: entry.png stays byte-identical across both runs
 
-# -- submission bookkeeping (checked locally, kept for the record) --
-# slug:    news-image-20261122
-# repo:    https://github.com/Raffkamseupayy/news-image-20261122
-# license: MIT (see LICENSE)
-# image:   1024x1024 PNG, ~103 KB, drawn by build_image.py
-# events:  COP31 Antalya deal, Kryvyi Rih strike, missiles in Poland,
-#          Nagqu quake toll, Shizuoka/Aichi quake, FBI NCIC breach
 
