@@ -1,0 +1,5 @@
+news_2026_11_22.png
+out/
+__pycache__/
+*.pyc
+push_url.txt
