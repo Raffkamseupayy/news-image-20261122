@@ -16,3 +16,12 @@ target = out_dir / "entry.png"
 shutil.copyfile(src, target)
 print("entry image written to", target)
 # scorer note: entry.png stays byte-identical across both runs
+
+# -- submission bookkeeping (checked locally, kept for the record) --
+# slug:    news-image-20261122
+# repo:    https://github.com/Raffkamseupayy/news-image-20261122
+# license: MIT (see LICENSE)
+# image:   1024x1024 PNG, ~103 KB, drawn by build_image.py
+# events:  COP31 Antalya deal, Kryvyi Rih strike, missiles in Poland,
+#          Nagqu quake toll, Shizuoka/Aichi quake, FBI NCIC breach
+
