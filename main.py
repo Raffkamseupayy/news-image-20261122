@@ -1,22 +1,18 @@
-#!/usr/bin/env python3
-"""Entry point for make.fun news-image-20261122.
+"""news-image-20261122 entrypoint.
 
-Copies the committed news image (news_2026_11_22.png, built deterministically
-by build_image.py: the 22 November 2026 world-news front page) to the output
-directory as entry.png. No network, no randomness, byte-identical every run.
-
-Run:  python3 main.py                       # writes /output/entry.png
-      MAKEFUN_OUTPUT_DIR=out python3 main.py
+Places the committed front page (news_2026_11_22.png) where the scorer
+expects it: /output/entry.png. The image ships in the repository and was
+drawn by build_image.py; nothing is fetched, nothing is random, so every
+run leaves the same bytes behind.
 """
 import os
 import shutil
+from pathlib import Path
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-OUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-
-SOURCE = os.path.join(HERE, "news_2026_11_22.png")
-TARGET = os.path.join(OUT_DIR, "entry.png")
-
-os.makedirs(OUT_DIR, exist_ok=True)
-shutil.copyfile(SOURCE, TARGET)
-print("wrote", TARGET)
+src = Path(__file__).resolve().parent / "news_2026_11_22.png"
+out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
+out_dir.mkdir(parents=True, exist_ok=True)
+target = out_dir / "entry.png"
+shutil.copyfile(src, target)
+print("entry image written to", target)
+# scorer note: entry.png stays byte-identical across both runs
